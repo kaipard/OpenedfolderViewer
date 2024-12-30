@@ -1,0 +1,116 @@
+{
+	"name": "vscode-openedfolder-viewer",
+	"displayName": "Openedfolder Viewer",
+	"description": "Display the files in the currently opened folder in Windows Explorer style",
+	"version": "0.0.1",
+	"publisher": "Kaipard",
+	"engines": {
+		"vscode": "^1.93.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"views": {
+			"explorer": [
+				{
+					"id": "openedfolderViewer",
+					"name": "Openedfolder Viewer",
+					"icon": "resources/icon.png"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "openedfolderViewer.refresh",
+				"title": "Refresh View"
+			},
+			{
+				"command": "openedfolderViewer.navigateToFolder",
+				"title": "Navigate to Folder"
+			},
+			{
+				"command": "openedfolderViewer.navigateBack",
+				"title": "Navigate Back",
+				"icon": {
+					"light": "resources/back.svg",
+					"dark": "resources/back.svg"
+				}
+			},
+			{
+				"command": "openedfolderViewer.navigateForward",
+				"title": "前进",
+				"icon": {
+					"light": "resources/forward.svg",
+					"dark": "resources/forward.svg"
+				}
+			},
+			{
+				"command": "openedfolderViewer.navigateToRoot",
+				"title": "返回根目录",
+				"icon": {
+					"light": "resources/home.svg",
+					"dark": "resources/home.svg"
+				}
+			}
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "openedfolderViewer.navigateBack",
+					"when": "view == openedfolderViewer",
+					"group": "navigation@1"
+				},
+				{
+					"command": "openedfolderViewer.navigateForward",
+					"when": "view == openedfolderViewer",
+					"group": "navigation@2"
+				},
+				{
+					"command": "openedfolderViewer.navigateToRoot",
+					"when": "view == openedfolderViewer",
+					"group": "navigation@3"
+				}
+			]
+		},
+		"configuration": {
+			"title": "Openedfolder Viewer",
+			"properties": {
+				"openedfolderViewer.ignoredExtensions": {
+					"type": "array",
+					"default": [
+						".meta"
+					],
+					"description": "要忽略的文件后缀名列表"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"lint": "eslint src --ext ts",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js",
+		"clean": "rimraf out && rimraf node_modules && rimraf package-lock.json"
+	},
+	"devDependencies": {
+		"@types/node": "^18.0.0",
+		"@types/vscode": "^1.93.1",
+		"eslint": "^8.9.0",
+		"rimraf": "^6.0.1",
+		"typescript": "^5.0.0"
+	},
+	"__metadata": {
+		"isApplicationScoped": false,
+		"installedTimestamp": 1735556377706,
+		"pinned": true,
+		"source": "vsix"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Kaipard/OpenedfolderViewer.git"
+	}
+}
